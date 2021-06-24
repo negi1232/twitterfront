@@ -1,0 +1,32 @@
+{% extends './base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+<head>
+    <title>Chart.jsを使うページ</title>
+
+    <!-- Chart.jsを読み込む -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+</head>
+
+<body>
+    <canvas id="radar-chart" height="70px"></canvas>
+
+<script type="text/javascript">
+
+/* idが"radar-chart"の要素を取得 */
+var ctx = document.getElementById("radar-chart");
+
+/* 上記要素にチャートを描画　*/
+var myRadarChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+        labels: ['国語', '算数', '理科', '社会', '英語'],
+        datasets: [{
+            label: "Aさん",
+            data: [65, 76, 87, 75, 90]
+        }]},
+});
+</script>
+
+
+{% endblock %}

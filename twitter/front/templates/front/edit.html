@@ -1,0 +1,78 @@
+{% extends './base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<script>
+    // ファイル選択フォームに変更時に、フォームの値をコンソールログに表示する
+    $("#upfile").change(function(){
+      var value = this.value;
+      console.log(value);
+    });
+    </script>
+    <h1>{{ message }}</h1>
+
+    <form action='{% url "front:update" article.seq %}' method='post' class='form' enctype="multipart/form-data">
+        {% csrf_token %}
+            
+            {{ form.content }}
+             
+
+            
+            <div>
+            {% if article.img_path1 %}
+                    <a href="{{ article.img_path1.url }}" data-lightbox="group"><img src="{{ article.img_path1.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+            {% endif %}
+                    <p >{{ form.image_1}}</p>
+
+            {% if article.img_path2 %}
+                    <a href="{{ article.img_path2.url }}" data-lightbox="group"><img src="{{ article.img_path2.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+            {% endif %}
+                    <p >{{ form.image_2}}</p>
+
+            {% if article.img_path3 %}
+                    <a href="{{ article.img_path3.url }}" data-lightbox="group"><img src="{{ article.img_path3.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+            {% endif %}
+                    <p >{{ form.image_3}}</p>
+
+            {% if article.img_path4 %}
+                    <a href="{{ article.img_path4.url }}" data-lightbox="group"><img src="{{ article.img_path4.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+            {% endif %}
+                    <p >{{ form.image_4}}</p>
+
+            </div>
+
+            <label class="upload-label" >
+            
+                <img src="{% static 'images/posting_time.png'%}"   width="50" height="50"> 
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal" style="display: none;">
+                     
+                </button>
+            
+            </label>
+        <button type='submit' class='btn btn-outline-primary'>保存する</button>
+        <!-- 切り替えボタンの設定 -->
+
+        <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="Modal" aria-hidden="true">
+            <!--以下modal-dialogのCSSの部分で modal-lgやmodal-smを追加するとモーダルのサイズを変更することができる-->
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="Modal">予約日時を指定してください</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    {{ form.posting_time}}
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">保存</button>
+                </div>
+              </div>
+            </div>
+          </div>
+    </form>
+    <div>
+    <a href='{% url "front:detail" article.seq %}' class='btn btn-outline-secondary'>戻る</a>
+    </div>
+{% endblock %}
