@@ -1,0 +1,74 @@
+{% extends './base.html' %}
+{% block content %}
+{% load bootstrap4 %}
+
+<body>
+
+    
+ 
+        
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th></th>
+                <th>name</th>
+                
+                
+                <th>フォロワー</th>
+                <th>フォロー</th>
+                <th>score</th>
+                <th>add_date</th>
+                <th>詳細</th>
+            </tr>
+        </thead>
+        {% for article in articles %}
+            <tr>
+            <th> <img src= {{article.profile_image_url}} style="border-radius:100px;"> </th>
+            <th> {{ article.name }} </th>
+            <th> {{ article.followers_count}} </th>
+            <th> {{ article.friends_count }} </th>
+            <th> {{ article.score }} </th>
+            <th> {{ article.add_date }} </th>
+            <th> <a  href='{% url "front:accountdetail" article.seq %}' class='btn btn-outline-primary' style="border-radius:100px;">詳細</a></th>
+            </tr>
+            
+        {% endfor %}
+    
+
+    </table>
+    
+
+    <div class="pager">
+        <!-- 前のページへのリンク -->
+        {% if articles.has_previous %}
+            <p>{{keyword|length}}</p>
+            {% if keyword|length  %}
+                <a  href="?pageNo={{pageNo|add:-1 }}&keyword={{keyword}}" >前へ</a>
+                
+            {% else %}
+                <a  href="?pageNo={{pageNo|add:-1 }}" >前へ</a>
+            {% endif %} 
+            
+        {% endif %}
+    
+        <!-- 現在のページ番号と全体のページ数 -->
+        <span>
+            {{ articles.number }} / {{ articles.paginator.num_pages }}
+        </span>
+    
+        <!-- 次のページへのリンク -->
+        {% if articles.has_next %}
+            {% if keyword|length%}
+                <a href="?pageNo={{pageNo|add:1}}&keyword={{keyword}}"">次へ</a>
+    
+            {% else %}
+                <a  href="?pageNo={{pageNo|add:1 }}" >次へ</a>
+            {% endif %} 
+    
+        {% endif %}
+        <h1>{{keyword}}</h1>
+        </div>
+</body>
+
+
+{% endblock %}

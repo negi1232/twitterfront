@@ -1,0 +1,27 @@
+{% extends './base.html' %}
+{% block content %}
+
+    <p>投稿内容 : {{ article.tweet }}</p>
+    <p>投稿時間 : {{ article.reserve_date }}</p>
+    
+    
+    
+    {% if article.img_path1 %}
+        <a href="{{ article.img_path1.url }}" data-lightbox="group"><img src="{{ article.img_path1.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+    {% endif %}
+    {% if article.img_path2 %}
+        <a href="{{ article.img_path2.url }}" data-lightbox="group"><img src="{{ article.img_path2.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+    {% endif %}
+    {% if article.img_path3 %}
+        <a href="{{ article.img_path3.url }}" data-lightbox="group"><img src="{{ article.img_path3.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+    {% endif %}
+    {% if article.img_path4 %}
+        <a href="{{ article.img_path4.url }}" data-lightbox="group"><img src="{{ article.img_path4.url }}" style="object-fit: cover;width: 200px;height: 200px;"></a>
+    {% endif %}
+    <div>
+        <a href='{% url "front:posttweetview" %}' class='btn btn-outline-primary'>一覧</a>
+        {% if article.tw_flg == '0' %}
+            <a href='{% url "front:edit" article.seq %}' class='btn btn-outline-primary'>編集</a>
+        {% endif %}
+    </div>
+{% endblock %}

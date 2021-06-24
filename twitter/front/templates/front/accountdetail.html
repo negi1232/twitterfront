@@ -1,0 +1,23 @@
+{% extends './base.html' %}
+{% block content %}
+
+    <p>name : {{ article.name }}</p>
+    <p>followdate : {{ article.add_date }}</p>
+    {%if article.location%}
+    <p>location : {{ article.location }}</p>
+    {%endif%}
+    {%if article.description%}
+    <p>description : {{ article.description }}</p>
+    {%endif%}
+    {%if article.followers_count%}
+    <p>followers_count : {{ article.followers_count }}</p>
+    {%endif%}
+    {%if article.friends_count%}
+    <p>friends_count : {{ article.friends_count }}</p>
+    {%endif%}
+    
+    
+    <div>
+        <input type="button" value="戻る" class='btn btn-outline-primary' onClick="javascript:history.go(-1);"> 
+    </div>
+{% endblock %}
